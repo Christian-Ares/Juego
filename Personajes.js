@@ -141,20 +141,6 @@ addMidEnemy(enemyMid){
 
 
 
-const enemy = new Image()
-    enemy.src = './Sprites/ALttP_Blue_Sword_Soldier_Sprite.png'
-
-    let enemyX = Math.floor(Math.random()*450)
-    let enemyY = Math.floor(Math.random()*450)
-    let selectedEnemy = enemy
-
-    const drawEnemy = () => {
-        ctx.drawImage(selectedEnemy, enemyX, enemyY, 40, 40)
-    }
-
-
-
-
 
 
 
