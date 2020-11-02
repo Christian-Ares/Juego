@@ -19,7 +19,6 @@ const player = {
 
 
 //Imagenes
-
 const enemy = new Image()
 enemy.src = './Sprites/ALttP_Blue_Sword_Soldier_Sprite.png';
 const playerSprite = new Image();
@@ -81,8 +80,7 @@ let movePlayer = () => {
         player.frameY = 2;
         player.moving = true;
     }
-    if(keys[80]){
-    }
+    if (keys[80]) {}
 }
 
 //Animación del Sprite
