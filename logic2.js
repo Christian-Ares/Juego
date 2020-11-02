@@ -1,7 +1,7 @@
 const canvas = document.getElementById('example');
 const ctx = canvas.getContext('2d');
 canvas.width = 700;
-canvas.height = 500
+canvas.height = 500;
 const keys = [];
 
 //Jugador 
@@ -19,34 +19,34 @@ const player = {
 
 
 //Imagenes
-const enemy = new Image()
+const enemy = new Image();
 enemy.src = './Sprites/ALttP_Blue_Sword_Soldier_Sprite.png';
 const playerSprite = new Image();
 playerSprite.src = "./Sprites/images.png";
 const background = new Image();
 background.src = "/Sprites/Fondo.png";
 
-const attack = new Image()
-attack.src = '/Sprites/attackLeft.png'
+const attack = new Image();
+attack.src = '/Sprites/attackLeft.png';
 
 //Enemigos
-let enemyX = Math.floor(Math.random() * 450)
-let enemyY = Math.floor(Math.random() * 390)
-let selectedEnemy = enemy
+let enemyX = Math.floor(Math.random() * 450);
+let enemyY = Math.floor(Math.random() * 390);
+let selectedEnemy = enemy;
 
 
 //Constantes para dibujar
 const drawAttack = () => {
-    ctx.drawImage(attack, player.x, player.y, player.width, player.height)
-}
+    ctx.drawImage(attack, player.x, player.y, player.width, player.height);
+};
 
 const drawEnemy = () => {
-    ctx.drawImage(selectedEnemy, enemyX, enemyY, 32, 48)
-}
+    ctx.drawImage(selectedEnemy, enemyX, enemyY, 32, 48);
+};
 
 const drawSprite = (img, sX, sY, sW, sH, dX, dY, dW, dH) => {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-}
+};
 
 
 // Bindeo de teclas
@@ -81,13 +81,13 @@ let movePlayer = () => {
         player.moving = true;
     }
     if (keys[80]) {}
-}
+};
 
 //Animación del Sprite
 let handlePlayerFrame = () => {
     if (player.frameX < 3 && player.moving) player.frameX++;
     else player.frameX = 0;
-}
+};
 
 let fps, fpsInterval, startTime, now, then, elapsed;
 
@@ -96,7 +96,7 @@ let startAnimation = (fps) => {
     then = Date.now();
     startTime = then;
     animate();
-}
+};
 
 let animate = () => {
     requestAnimationFrame(animate);
@@ -112,7 +112,7 @@ let animate = () => {
         drawEnemy();
         //drawAttack();
     }
-}
+};
 
 //Movimiento del enemigo
 let enemyMove;
