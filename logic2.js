@@ -19,6 +19,7 @@ const player = {
 
 
 //Imagenes
+
 const enemy = new Image()
 enemy.src = './Sprites/ALttP_Blue_Sword_Soldier_Sprite.png';
 const playerSprite = new Image();
