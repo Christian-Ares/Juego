@@ -3,8 +3,10 @@ const ctx = canvas.getContext('2d');
 canvas.width = 700;
 canvas.height = 500;
 const keys = [];
+let counter = 0;
+const enemies = [];
 
-//Jugador 
+//Personajes
 
 const player = {
     x: 200,
@@ -14,34 +16,53 @@ const player = {
     frameX: 0,
     frameY: 0,
     speed: 9,
-    moving: false
+    moving: false,
+    attack: false,
+    lifes: 3000
 };
 
+const attack = {
+    x: player.x,
+    y: player.y,
+    width: player.width,
+    height: player.height,
+    frameX: 0,
+    frameY: 0,
 
+
+};
+
+let enemy = {
+    x: Math.floor(Math.random() * 450),
+    y: Math.floor(Math.random() * 390),
+    width: 32,
+    height: 50,
+    life: 40,
+    vx: 5
+};
 //Imagenes
-const enemy = new Image();
-enemy.src = './Sprites/ALttP_Blue_Sword_Soldier_Sprite.png';
+
+const enemySprite = new Image();
+enemySprite.src = '/Sprites/TMC_Octorok_Sprite.png';
+
 const playerSprite = new Image();
-playerSprite.src = "./Sprites/images.png";
+playerSprite.src = "/Sprites/images.png";
+
 const background = new Image();
 background.src = "/Sprites/Fondo.png";
 
-const attack = new Image();
-attack.src = '/Sprites/attackLeft.png';
-
-//Enemigos
-let enemyX = Math.floor(Math.random() * 450);
-let enemyY = Math.floor(Math.random() * 390);
-let selectedEnemy = enemy;
+const attackImage = new Image();
+attackImage.src = '/Sprites/TMC_Vaati_Sprite.png';
 
 
 //Constantes para dibujar
+
 const drawAttack = () => {
-    ctx.drawImage(attack, player.x, player.y, player.width, player.height);
+    ctx.drawImage(attackImage, player.x, player.y, player.width, player.height);
 };
 
 const drawEnemy = () => {
-    ctx.drawImage(selectedEnemy, enemyX, enemyY, 32, 48);
+    ctx.drawImage(enemySprite, enemy.x, enemy.y, enemy.width, enemy.height);
 };
 
 const drawSprite = (img, sX, sY, sW, sH, dX, dY, dW, dH) => {
@@ -53,10 +74,12 @@ const drawSprite = (img, sX, sY, sW, sH, dX, dY, dW, dH) => {
 window.addEventListener("keydown", (e) => {
     keys[e.keyCode] = true;
     //player.moving = true;
+    player.attack = true;
 });
 window.addEventListener("keyup", (e) => {
     delete keys[e.keyCode];
     player.moving = false;
+    player.attack = false;
 });
 
 let movePlayer = () => {
@@ -80,7 +103,19 @@ let movePlayer = () => {
         player.frameY = 2;
         player.moving = true;
     }
-    if (keys[80]) {}
+
+};
+//Ataque
+let attackPlayer = () => {
+    // if (keys[80]) {
+    //     player.attack = true;
+    //     if (player.attack == true && enemy.x == player.x && enemy.y == player.y) {
+    //         drawAttack();
+    //         enemy.life--
+    //         console.log(enemy.life)
+    //     }
+
+    // }
 };
 
 //Animación del Sprite
@@ -109,18 +144,91 @@ let animate = () => {
         drawSprite(playerSprite, player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width, player.height);
         movePlayer();
         handlePlayerFrame();
+        attackPlayer();
         drawEnemy();
+        //randomMove();
+        collision();
         //drawAttack();
+        counter++;
     }
+
+};
+//Movimiento aleatorio funcional!
+const animateEnemies = () => {
+    let direction = [1, 0, -1];
+    let randomDirectionx = 1;
+    let randomDirectiony = 0;
+    let speed = 2;
+
+    setInterval(() => {
+        if (enemy.x > 650) {
+            enemy.x = 650;
+        }
+        if (enemy.x < 0) {
+            enemy.x = 0;
+        }
+        if (enemy.y > 400) {
+            enemy.y = 400;
+        }
+        if (enemy.y < 0) {
+            enemy.y = 0;
+        }
+        enemy.x = enemy.x + speed * randomDirectionx;
+        enemy.y = enemy.y + speed * randomDirectiony;
+    }, 100);
+    setInterval(() => {
+        randomDirectionx = direction[Math.floor(Math.random() * 3)];
+        randomDirectiony = direction[Math.floor(Math.random() * 3)];
+    }, 2000);
+
+};
+animateEnemies();
+
+// Colisiones
+const collision = () => {
+    if (Math.abs(player.x - enemy.x) <= 30) {
+
+        if (Math.abs(player.y - enemy.y) <= 35) {
+            console.log('se estan tocando');
+        }
+    }
+    if (keys[80]) {
+        player.attack = true;
+        if (player.attack == true) {
+            drawAttack();
+        }
+        if (enemy.x == player.x && enemy.y == player.y) {
+            enemy.life--;
+            console.log(enemy.life);
+        }
+
+    }
+
+
+
+
+
+
+
+
+    // document.addEventListener('keydown', (e) => {
+    //     if (e.key === 'p') {
+    //         player.attack = true
+    //     }
+
+    //console.log(player.attack)
+    // if (player.attack === true) {
+    //     enemy.lifes--
+    // } else {
+    //     player.lifes--
+    // }
+    // console.log(enemy.lifes)
+    //})
 };
 
-//Movimiento del enemigo
-let enemyMove;
 
-// enemyMove = setTimeOut(() => {
-//     enemyX += Math.floor(Math.random() * enemyX)
-//     enemyY += Math.floor(Math.random() * enemyY)
-// }, 30)
+
+
 
 
 startAnimation(15);

@@ -1,52 +1,52 @@
-//Enemigos
+// //Enemigos
 
-class enemyLow{
-    constructor(health, strength, defense){
-        this.health = health
-        this.strength = strength
-        this.defense = defense
-    }
-    receiveDamage(damage){
-        this.health -= damage
-        this.defense -= damage / 2
-        if(this.health > 0){
-            // sacarlo del escenario del canvas
-        }
-    }
-}
+// class enemyLow{
+//     constructor(health, strength, defense){
+//         this.health = health
+//         this.strength = strength
+//         this.defense = defense
+//     }
+//     receiveDamage(damage){
+//         this.health -= damage
+//         this.defense -= damage / 2
+//         if(this.health > 0){
+//             // sacarlo del escenario del canvas
+//         }
+//     }
+// }
 
-class enemyMid{
-    constructor(x, y, health, strength, defense){
-        this.health = health
-        this.strength = strength
-        this.defense = defense
-        this.x = Math.floor(Math.random()*450);
-        this.y = Math.floor(Math.random()*300);
-    }
-    receiveDamage(damage){
-        this.health -= damage
-        this.defense -= damage / 3
-        if(this.health > 0){
-            // sacarlo del escenario del canvas
-        }
-    }
-}
+// class enemyMid{
+//     constructor(x, y, health, strength, defense){
+//         this.health = health
+//         this.strength = strength
+//         this.defense = defense
+//         this.x = Math.floor(Math.random()*450);
+//         this.y = Math.floor(Math.random()*300);
+//     }
+//     receiveDamage(damage){
+//         this.health -= damage
+//         this.defense -= damage / 3
+//         if(this.health > 0){
+//             // sacarlo del escenario del canvas
+//         }
+//     }
+// }
 
 
-class Enemies {
-    constructor(){
-        this.enemyLowArmy = []
-        this.enemyMidArmy = []
-    }
+// class Enemies {
+//     constructor(){
+//         this.enemyLowArmy = []
+//         this.enemyMidArmy = []
+//     }
 
-addLowEnemy(enemyLow){
-    this.enemyLowArmy.push(enemyLow)
-}
-addMidEnemy(enemyMid){
-    this.enemyMidArmy.push(enemyMid)
-}
+// addLowEnemy(enemyLow){
+//     this.enemyLowArmy.push(enemyLow)
+// }
+// addMidEnemy(enemyMid){
+//     this.enemyMidArmy.push(enemyMid)
+// }
 
-}
+// }
 
 // class enemyHigh{
 //     constructor(health, strength, defense){
