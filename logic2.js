@@ -75,13 +75,13 @@ const createEnemies = () => {
 
 //Imagenes
 const enemySprite = new Image();
-enemySprite.src = "./Sprites/TMC_Octorok_Sprite.png";
+enemySprite.src = "/Sprites/TMC_Octorok_Sprite.png";
 const playerSprite = new Image();
-playerSprite.src = "./Sprites/images.png";
+playerSprite.src = "/Sprites/images.png";
 const background = new Image();
-background.src = "./Sprites/Fondo.png";
+background.src = "/Sprites/Fondo.png";
 const attackImage = new Image();
-attackImage.src = "./Sprites/TMC_Link_Sprite_7.png";
+attackImage.src = "/Sprites/TMC_Link_Sprite_7.png";
 
 
 //Constantes para dibujar
@@ -183,6 +183,7 @@ setInterval(() => {
 }, 2000);
 
 // Colisiones y Ataque
+
 const collision = () => {
     enemies.forEach((enemy, i) => {
         if (Math.abs(player.x - enemy.x) <= 30) {
