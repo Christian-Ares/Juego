@@ -20,6 +20,38 @@ const draw = () => {
     
 
 
+
+
+    document.getElementById('start-button').onclick = (event) => {
+        if(clickable){
+          event.target.classList.add('unclickable-button')
+          clickable = false
+          endGame = false
+          startGame();
+        }
+      };
+    
+      startGame = () => {
+        if(!endGame){
+        animate();
+        
+        startAnimation(15);
+    
+        } else {
+          renderGameOverText()
+          document.getElementById('start-button').classList.remove('unclickable-button')
+          clickable = true
+        }
+      };
+
+
+
+
+
+
+
+
+
     const heroRight = new Image();
     heroRight.src = './Sprites Link/LinkRight1.png';
 
