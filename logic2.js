@@ -268,6 +268,7 @@ document.getElementById('restart-button').onclick = (event) => {
 const checkEndGame = () => {
     if (player.life == 0) {
         endGame = true
+        location.reload()
     }
 };
 
@@ -279,10 +280,11 @@ startGame = () => {
         startAnimation(15);
         animateEnemies();
         createEnemies();
-        backgroundAudio.play()
+        backgroundAudio.play();
     } else {
         ctx.clearRect(0,0,700,500)
         drawGameOver();
+        location.reload();
 
     }
 };
