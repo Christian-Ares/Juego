@@ -6,7 +6,7 @@ const keys = [];
 let score = 0;
 const enemies = [];
 let dateRightNow = Date.now();
-let clickable = true;
+let clickable = true
 //Personajes
 const player = {
     x: 200,
@@ -81,7 +81,7 @@ const playerSprite = new Image();
 playerSprite.src = "./Sprites/images.png";
 
 const background = new Image();
-background.src = "./Sprites/Fondo.png";
+background.src = "./Sprites/Escenario.png";
 
 const attackImage = new Image();
 attackImage.src = "./Sprites/TMC_Link_Sprite_7.png";
@@ -186,7 +186,6 @@ setInterval(() => {
 }, 2000);
 
 // Colisiones y Ataque
-
 const collision = () => {
     enemies.forEach((enemy, i) => {
         if (Math.abs(player.x - enemy.x) <= 30) {
