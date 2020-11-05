@@ -14,14 +14,17 @@
 
 <body>
 
-    <div class="text-center">
-        
+    <div class="text-center mt-3">
+        <canvas id="example"></canvas>
+    </div>
 
-<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#staticBackdrop">
+    <button id="on" class="btn btn-secondary" type="submit">Sound On</button>
+    <button id="off" class="btn btn-secondary" type="submit">Sound Off</button>
+    
+<button type="button" class="btn btn-primary m-4" data-toggle="modal" data-target="#staticBackdrop">
     Instructions
   </button>
-  
-  
+
   <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -42,9 +45,14 @@
     </div>
   </div>
   
-        <canvas id="example"></canvas>
-    </div>
-    <button type="button" id="start-button" class="btn btn-outline-danger">Start Game!</button>
+
+
+
+
+
+    <button type="button" id="start-button" class="btn btn-outline-danger m-4">Start Game!</button>
+
+    <input id="restart-button" class="btn btn-info m-4" type="reset" value="Reset">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

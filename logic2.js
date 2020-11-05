@@ -7,6 +7,10 @@ let score = 0;
 const enemies = [];
 let dateRightNow = Date.now();
 let clickable = true;
+let endGame = false;
+let backgroundAudio = new Audio('./Sprites/22 Hymn of Storm.mp3');
+backgroundAudio.loop = true;
+backgroundAudio.volume = .2;
 //Personajes
 const player = {
     x: 200,
@@ -64,11 +68,11 @@ class Enemy {
         }, 2000);
     }
 }
+
 const createEnemies = () => {
     setInterval(() => {
-        const newEnemy = new Enemy(randomX(), randomY(), 32, 50, 15);
+        const newEnemy = new Enemy(randomX(), randomY(), 32, 50, 20);
         enemies.push(newEnemy);
-        console.log(enemies);
     }, 3000);
 };
 
@@ -86,31 +90,41 @@ background.src = "./Sprites/Escenario.png";
 const attackImage = new Image();
 attackImage.src = "./Sprites/TMC_Link_Sprite_7.png";
 
+const gameOver = new Image();
+gameOver.src = "./Sprites/GameOver.jpg";
+
 
 //Constantes para dibujar
 const drawAttack = () => {
     ctx.drawImage(attackImage, player.x, player.y, player.width, player.height);
 };
+
 const drawEnemy = () => {
     enemies.forEach((enemy) => {
         ctx.drawImage(enemySprite, enemy.x, enemy.y, enemy.width, enemy.height);
     });
 };
+
 const drawSprite = (img, sX, sY, sW, sH, dX, dY, dW, dH) => {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+};
+
+const drawGameOver = () => {
+    ctx.drawImage(gameOver, 0,0,canvas.width, canvas.height);
 };
 
 // Bindeo de teclas
 window.addEventListener("keydown", (e) => {
     keys[e.keyCode] = true;
-    //player.moving = true;
     player.attack = true;
 });
+
 window.addEventListener("keyup", (e) => {
     delete keys[e.keyCode];
     player.moving = false;
     player.attack = false;
 });
+
 let movePlayer = () => {
     if (keys[38] && player.y > 0) {
         player.y -= player.speed;
@@ -133,11 +147,13 @@ let movePlayer = () => {
         player.moving = true;
     }
 };
+
 //Animación del Sprite
 let handlePlayerFrame = () => {
     if (player.frameX < 3 && player.moving) player.frameX++;
     else player.frameX = 0;
 };
+
 let fps, fpsInterval, startTime, now, then, elapsed;
 let startAnimation = (fps) => {
     fpsInterval = 1000 / fps;
@@ -171,8 +187,10 @@ let animate = () => {
         collision();
         renderScore();
         renderPlayerLife();
+        checkEndGame();
     }
 };
+
 //Movimiento aleatorio funcional!
 const animateEnemies = () => {
     enemies.forEach((enemy) => {
@@ -202,12 +220,17 @@ const collision = () => {
                     }
                 } else {
                     player.life--;
-                    if (player.life == 0) {}
+                    if (player.life == 0) {
+                        location.reload()
+                    }
                 }
             }
         }
     });
 };
+
+
+//Renders
 
 const renderScore = () => {
     ctx.font = "20px sans-serif";
@@ -224,6 +247,9 @@ const renderPlayerLife = () => {
     ctx.fillStyle = "brown";
 }
 
+
+//Botones
+
 document.getElementById('start-button').onclick = (event) => {
     if (clickable) {
         event.target.classList.add('unclickable-button')
@@ -233,18 +259,52 @@ document.getElementById('start-button').onclick = (event) => {
     }
 };
 
+
+document.getElementById('restart-button').onclick = (event) => {  
+        location.reload() 
+};
+
+//EndGame y StartGame
+const checkEndGame = () => {
+    if (player.life == 0) {
+        endGame = true
+    }
+};
+
+
+
 startGame = () => {
     if (!endGame) {
         animate();
         startAnimation(15);
         animateEnemies();
         createEnemies();
+        backgroundAudio.play()
     } else {
-        renderGameOverText()
-        document.getElementById('start-button').classList.remove('unclickable-button')
-        clickable = true
+        ctx.clearRect(0,0,700,500)
+        drawGameOver();
+
     }
 };
 
 
-// Falta: endGame y restart, audio, challengues si da tiempo!
+//Audio
+
+    const soundOnButton = document.getElementById('on');
+
+    const soundOffButton = document.getElementById('off');
+
+    const soundOff = () => {
+    backgroundAudio.volume = 0
+    };
+
+    const soundOn = () => {
+    backgroundAudio.volume = .2
+    };
+
+    soundOnButton.addEventListener('click', ()=>{
+        soundOn()
+    });
+    soundOffButton.addEventListener('click', ()=>{
+        soundOff()
+    });
