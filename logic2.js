@@ -6,7 +6,7 @@ const keys = [];
 let score = 0;
 const enemies = [];
 let dateRightNow = Date.now();
-let clickable = true
+let clickable = true;
 //Personajes
 const player = {
     x: 200,
