@@ -11,6 +11,7 @@ let endGame = false;
 let backgroundAudio = new Audio('./Sprites/22 Hymn of Storm.mp3');
 backgroundAudio.loop = true;
 backgroundAudio.volume = .2;
+
 //Personajes
 const player = {
     x: 200,
@@ -110,7 +111,7 @@ const drawSprite = (img, sX, sY, sW, sH, dX, dY, dW, dH) => {
 };
 
 const drawGameOver = () => {
-    ctx.drawImage(gameOver, 0,0,canvas.width, canvas.height);
+    ctx.drawImage(gameOver, 0, 0, canvas.width, canvas.height);
 };
 
 // Bindeo de teclas
@@ -260,8 +261,8 @@ document.getElementById('start-button').onclick = (event) => {
 };
 
 
-document.getElementById('restart-button').onclick = (event) => {  
-        location.reload() 
+document.getElementById('restart-button').onclick = (event) => {
+    location.reload()
 };
 
 //EndGame y StartGame
@@ -282,7 +283,7 @@ startGame = () => {
         createEnemies();
         backgroundAudio.play();
     } else {
-        ctx.clearRect(0,0,700,500)
+        ctx.clearRect(0, 0, 700, 500)
         drawGameOver();
         location.reload();
 
@@ -292,21 +293,21 @@ startGame = () => {
 
 //Audio
 
-    const soundOnButton = document.getElementById('on');
+const soundOnButton = document.getElementById('on');
 
-    const soundOffButton = document.getElementById('off');
+const soundOffButton = document.getElementById('off');
 
-    const soundOff = () => {
+const soundOff = () => {
     backgroundAudio.volume = 0
-    };
+};
 
-    const soundOn = () => {
+const soundOn = () => {
     backgroundAudio.volume = .2
-    };
+};
 
-    soundOnButton.addEventListener('click', ()=>{
-        soundOn()
-    });
-    soundOffButton.addEventListener('click', ()=>{
-        soundOff()
-    });
+soundOnButton.addEventListener('click', () => {
+    soundOn()
+});
+soundOffButton.addEventListener('click', () => {
+    soundOff()
+});
