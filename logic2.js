@@ -72,7 +72,7 @@ class Enemy {
 
 const createEnemies = () => {
     setInterval(() => {
-        const newEnemy = new Enemy(randomX(), randomY(), 32, 50, 20);
+        const newEnemy = new Enemy(randomX(), randomY(), 32, 50, 25);
         enemies.push(newEnemy);
     }, 3000);
 };
