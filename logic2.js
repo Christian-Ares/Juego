@@ -23,7 +23,7 @@ const player = {
     speed: 9,
     moving: false,
     attack: false,
-    life: 30,
+    life: 40,
 };
 //Enemigos
 let randomX = () => {
@@ -72,7 +72,7 @@ class Enemy {
 
 const createEnemies = () => {
     setInterval(() => {
-        const newEnemy = new Enemy(randomX(), randomY(), 32, 50, 25);
+        const newEnemy = new Enemy(randomX(), randomY(), 32, 50, 30);
         enemies.push(newEnemy);
     }, 3000);
 };
